@@ -1,4 +1,8 @@
 package tabou.html;
+import java.io.IOException;
+import java.io.UncheckedIOException;
+import java.nio.file.Path;
+import java.nio.file.Files;
 import java.io.InputStream;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
@@ -14,6 +18,13 @@ public class HtmlToXml{
  public static void main(String[] args)throws Exception{
   Document dom = loadDom(System.in);
   Xpath.printDom(dom);
+ }
+ public static Document load(Path file){
+  try(var in = Files.newInputStream(file)){
+   return loadDom(in);
+  }catch(IOException e){
+   throw new UncheckedIOException(e);
+  }
  }
  public static Document loadDom(InputStream input) {
  Parser parser = new Parser();

@@ -26,8 +26,8 @@ tasks.withType<Jar>().configureEach{
  archiveBaseName.set(project.group.toString() + "."
   + rootProject.name)
 }
-publishing {
- publications {
+publishing{
+ publications{
   create<MavenPublication>("maven"){
    from(components["java"])
    artifactId = (project.group.toString() + "."

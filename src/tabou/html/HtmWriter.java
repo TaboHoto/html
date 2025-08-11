@@ -72,9 +72,9 @@ public class HtmWriter implements AutoCloseable{
    this.xWriter.tag("img");
    this.xWriter.att("src",src);
    func.accept(this);
-  } 
+  }
   return this;
- } 
+ }
  public HtmWriter br(){
      this.xWriter.empty("br");
      return this;

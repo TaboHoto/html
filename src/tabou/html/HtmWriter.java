@@ -28,9 +28,25 @@ public class HtmWriter implements AutoCloseable{
      this.xWriter.tag("head");
      return this;
  }
+ public HtmWriter style(){
+     this.xWriter.tag("style");
+     return this;
+ }
  public HtmWriter body(){
   this.xWriter.tag("body");
   return this;
+ }
+ public HtmWriter h1(){
+     this.xWriter.tag("h1");
+     return this;
+ }
+ public HtmWriter h2(){
+     this.xWriter.tag("h2");
+     return this;
+ }
+ public HtmWriter h3(){
+     this.xWriter.tag("h3");
+     return this;
  }
  public HtmWriter dl(){
      this.xWriter.tag("dl");

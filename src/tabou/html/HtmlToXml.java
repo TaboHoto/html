@@ -4,6 +4,7 @@ import java.io.UncheckedIOException;
 import java.nio.file.Path;
 import java.nio.file.Files;
 import java.io.InputStream;
+import java.io.Reader;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.TransformerException;
@@ -26,9 +27,14 @@ public class HtmlToXml{
    throw new UncheckedIOException(e);
   }
  }
- public static Document loadDom(InputStream input) {
+ public static Document load(Reader reader){
+  return loadSource(new InputSource(reader));
+ }
+ public static Document loadDom(InputStream input){
+  return loadSource(new InputSource(input));
+ }
+ public static Document loadSource(InputSource source){
  Parser parser = new Parser();
-
  try {
    parser.setFeature(Parser.namespacesFeature, false);
    parser.setFeature(Parser.namespacePrefixesFeature, false);
@@ -36,7 +42,7 @@ public class HtmlToXml{
    parser.setFeature("http://www.ccil.org/~cowan/tagsoup/features/ignore-bogons",false);
    DOMResult result = new DOMResult();
    Transformer transformer = TransformerFactory.newInstance().newTransformer();
-   transformer.transform(new SAXSource(parser, new InputSource(input)), result);
+   transformer.transform(new SAXSource(parser,source), result);
    return (Document) result.getNode();
  } catch (TransformerException | SAXException e) {
    throw new RuntimeException(e);
